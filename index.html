@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOBAKU - Nikmati Kesegaran Setiap Tegukan</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-dark: #4A3326;
+            --primary-brown: #5C3D2E;
+            --accent-warm: #8C5A3C;
+            --bg-cream: #F9F5F0;
+            --bg-card: #FFFFFF;
+            --text-main: #333333;
+            --text-muted: #7A6E65;
+            --badge-bg: #8C5A3C;
+            --pill-price: #EADBC8;
+            --pill-price-text: #4A3326;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            padding: 16px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            color: #F3E5AB;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #E2D3C7;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #FFFFFF;
+            border-radius: 2px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #E2D3C7;
+        }
+
+        .heart-icon {
+            color: #FFFFFF;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .heart-icon:hover {
+            transform: scale(1.2);
+            color: #FF6B6B;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-banner {
+            background: linear-gradient(135deg, #F0E5D8 0%, #E6D7C3 100%);
+            border-radius: 24px;
+            padding: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 48px;
+            box-shadow: 0 10px 30px rgba(74, 51, 38, 0.05);
+        }
+
+        .hero-content {
+            max-width: 500px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: #FFFFFF;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 24px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-icon-bg {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(74, 51, 38, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+        }
+
+        .feature-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-img {
+            max-width: 380px;
+            height: auto;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:hover {
+            transform: translateY(-5px);
+        }
+
+        /* SVG Decorative Bubbles / Doodles in Hero */
+        .boba-doodle {
+            position: absolute;
+            right: 320px;
+            top: 60px;
+            opacity: 0.4;
+        }
+
+        .boba-arrow {
+            position: absolute;
+            right: 350px;
+            bottom: 80px;
+            opacity: 0.6;
+        }
+
+        .boba-badge-tag {
+            position: absolute;
+            right: 40px;
+            top: 100px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            color: var(--primary-dark);
+            transform: rotate(12deg);
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* --- MENU SECTION --- */
+        .section-header {
+            margin-bottom: 28px;
+        }
+
+        .section-subtitle {
+            color: var(--accent-warm);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .menu-card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(74, 51, 38, 0.08);
+        }
+
+        .card-img-container {
+            width: 130px;
+            height: 130px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Specific background colors for drink images as seen in design */
+        .bg-boba { background-color: #EAD8C8; }
+        .bg-matcha { background-color: #C3D8AF; }
+        .bg-coffee { background-color: #A38B78; }
+        .bg-strawberry { background-color: #F8BBD0; }
+        .bg-mango { background-color: #FFE082; }
+        .bg-chocolate { background-color: #9E8279; }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .drink-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .drink-ingredients {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .drink-price-btn {
+            display: inline-block;
+            align-self: flex-start;
+            background-color: #F3E9DF;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .drink-price-btn:hover {
+            background-color: var(--primary-dark);
+            color: #FFFFFF;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: #E2D3C7;
+            padding: 48px 5% 24px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: #C2B2A5;
+        }
+
+        .footer-column h4 {
+            color: #FFFFFF;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #C2B2A5;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #FFFFFF;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-warm);
+        }
+
+        .social-note {
+            font-size: 0.8rem;
+            color: #C2B2A5;
+            line-height: 1.4;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.75rem;
+            color: #A39387;
+        }
+
+        /* Responsive Layout Adjustments */
+        @media (max-width: 992px) {
+            .hero-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 36px 24px;
+            }
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 32px;
+            }
+            .hero-features {
+                justify-content: center;
+            }
+            .boba-doodle, .boba-arrow, .boba-badge-tag {
+                display: none;
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none; /* simple toggle placeholder */
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-cup-togo logo-icon"></i> BOBAKU
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Beranda</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#tentang">Tentang Kami</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+            <div class="nav-right">
+                <span>Minuman enak, mood makin naik!</span>
+                <i class="fa-regular fa-heart heart-icon"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        
+        <!-- HERO SECTION -->
+        <section class="hero-banner">
+            <div class="hero-content">
+                <span class="hero-badge">Fresh & Delicious</span>
+                <h1 class="hero-title">Nikmati Kesegaran Setiap Tegukan</h1>
+                <p class="hero-desc">
+                    BobaKu hadir dengan berbagai pilihan minuman lezat yang dibuat dari bahan berkualitas, cocok untuk menemani hari-harimu.
+                </p>
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <div class="feature-icon-bg">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <div class="feature-text">Bahan<br>Berkualitas</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-bg">
+                            <i class="fa-solid fa-glass-water"></i>
+                        </div>
+                        <div class="feature-text">Rasa<br>Premium</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-bg">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="feature-text">Harga<br>Terjangkau</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Image & Annotations -->
+            <div class="hero-image-wrapper">
+                <div class="boba-badge-tag">Boba Milk<br>Best Seller!</div>
+                <!-- SVG Boba Cup Graphic -->
+                <svg class="hero-img" viewBox="0 0 300 400" width="300" height="400">
+                    <!-- Straw -->
+                    <rect x="180" y="20" width="16" height="150" rx="8" fill="#3D2314" transform="rotate(12 180 20)" />
+                    <!-- Lid -->
+                    <ellipse cx="150" cy="110" rx="90" ry="20" fill="#EADBC8" />
+                    <ellipse cx="150" cy="105" rx="95" ry="15" fill="#4A3326" opacity="0.2" />
+                    <!-- Cup Body -->
+                    <path d="M70,110 L90,340 C92,360 110,370 150,370 C190,370 208,360 210,340 L230,110 Z" fill="url(#drinkGradient)" />
+                    <!-- Milk Foam Top -->
+                    <path d="M70,110 Q150,135 230,110 Q210,150 150,150 Q90,150 70,110 Z" fill="#FFF8F0" />
+                    <!-- Brown Sugar Drip FX -->
+                    <path d="M70,110 C90,180 110,130 130,220 C140,160 160,250 180,140 C200,200 220,130 230,110 L210,340 C208,360 190,370 150,370 C110,370 92,360 90,340 Z" fill="#5C3D2E" opacity="0.4" />
+                    <!-- Boba Pearls -->
+                    <circle cx="120" cy="320" r="14" fill="#1A0C05" />
+                    <circle cx="150" cy="335" r="15" fill="#261207" />
+                    <circle cx="180" cy="315" r="14" fill="#1A0C05" />
+                    <circle cx="135" cy="290" r="13" fill="#261207" />
+                    <circle cx="165" cy="295" r="14" fill="#1A0C05" />
+                    <circle cx="105" cy="340" r="12" fill="#261207" />
+                    <circle cx="195" cy="335" r="12" fill="#261207" />
+                    <circle cx="150" cy="265" r="13" fill="#1A0C05" />
+                    <!-- Cup Highlights -->
+                    <path d="M85,130 L100,330" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.3" />
+                    <!-- Gradients -->
+                    <defs>
+                        <linearGradient id="drinkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#F5E6D3" />
+                            <stop offset="50%" stop-color="#D7B18C" />
+                            <stop offset="100%" stop-color="#6F4228" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </section>
+
+        <!-- MENU SECTION -->
+        <section id="menu">
+            <div class="section-header">
+                <div class="section-subtitle">Menu Kami</div>
+                <h2 class="section-title">Pilihan Minuman Terbaik</h2>
+                <p class="section-desc">Dari yang klasik sampai yang kekinian, semua ada di sini!</p>
+            </div>
+
+            <div class="menu-grid">
+                
+                <!-- Card 1: Boba Milk -->
+                <div class="menu-card">
+                    <div class="card-img-container bg-boba">
+                        <svg viewBox="0 0 100 100" width="80" height="80">
+                            <rect x="47" y="5" width="6" height="40" fill="#4A3326" transform="rotate(10 50 20)"/>
+                            <path d="M25,30 L32,85 C33,90 40,92 50,92 C60,92 67,90 68,85 L75,30 Z" fill="#D7B18C"/>
+                            <path d="M25,30 C35,40 45,30 55,40 C65,30 70,35 75,30 L72,60 C60,65 40,55 28,60 Z" fill="#6F4228" opacity="0.6"/>
+                            <circle cx="40" cy="78" r="5" fill="#261207"/>
+                            <circle cx="52" cy="82" r="5" fill="#261207"/>
+                            <circle cx="60" cy="75" r="5" fill="#261207"/>
+                            <circle cx="46" cy="70" r="4.5" fill="#261207"/>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="drink-title">Boba Milk</h3>
+                        <p class="drink-ingredients">Milk + Brown Sugar + Boba</p>
+                        <button class="drink-price-btn">Rp15.000</button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Matcha Latte -->
+                <div class="menu-card">
+                    <div class="card-img-container bg-matcha">
+                        <svg viewBox="0 0 100 100" width="80" height="80">
+                            <rect x="47" y="5" width="6" height="40" fill="#2D4020" transform="rotate(-5 50 20)"/>
+                            <path d="M25,30 L32,85 C33,90 40,92 50,92 C60,92 67,90 68,85 L75,30 Z" fill="#8FA876"/>
+                            <path d="M25,30 Q50,42 75,30 L73,50 Q50,60 27,50 Z" fill="#FFFFFF" opacity="0.8"/>
+                            <circle cx="38" cy="80" r="5" fill="#1C2814"/>
+                            <circle cx="50" cy="83" r="5" fill="#1C2814"/>
+                            <circle cx="62" cy="78" r="5" fill="#1C2814"/>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="drink-title">Matcha Latte</h3>
+                        <p class="drink-ingredients">Matcha + Fresh Milk</p>
+                        <button class="drink-price-btn">Rp18.000</button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Coffee Cream -->
+                <div class="menu-card">
+                    <div class="card-img-container bg-coffee">
+                        <svg viewBox="0 0 100 100" width="80" height="80">
+                            <rect x="47" y="5" width="6" height="40" fill="#1A0C05" transform="rotate(8 50 20)"/>
+                            <path d="M25,30 L32,85 C33,90 40,92 50,92 C60,92 67,90 68,85 L75,30 Z" fill="#FFF8F0"/>
+                            <path d="M25,30 Q50,40 75,30 L73,55 Q50,45 27,60 Z" fill="#4A2810"/>
+                            <circle cx="42" cy="78" r="4.5" fill="#261207"/>
+                            <circle cx="55" cy="80" r="4.5" fill="#261207"/>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="drink-title">Coffee Cream</h3>
+                        <p class="drink-ingredients">Coffee + Milk + Cream</p>
+                        <button class="drink-price-btn">Rp17.000</button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Strawberry Tea -->
+                <div class="menu-card">
+                    <div class="card-img-container bg-strawberry">
+                        <svg viewBox="0 0 100 100" width="80" height="80">
+                            <rect x="47" y="5" width="6" height="40" fill="#801222" transform="rotate(-8 50 20)"/>
+                            <path d="M25,30 L32,85 C33,90 40,92 50,92 C60,92 67,90 68,85 L75,30 Z" fill="#E63956"/>
+                            <!-- Whipped Cream Top -->
+                            <path d="M25,30 Q35,15 50,20 Q65,15 75,30 Z" fill="#FFFFFF"/>
+                            <circle cx="50" cy="18" r="5" fill="#D62828"/>
+                            <circle cx="40" cy="78" r="4.5" fill="#5E0B1B"/>
+                            <circle cx="52" cy="82" r="4.5" fill="#5E0B1B"/>
+                            <circle cx="60" cy="75" r="4.5" fill="#5E0B1B"/>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="drink-title">Strawberry Tea</h3>
+                        <p class="drink-ingredients">Fresh Strawberry + Tea</p>
+                        <button class="drink-price-btn">Rp16.000</button>
+                    </div>
+                </div>
+
+                <!-- Card 5: Mango Yakult -->
+                <div class="menu-card">
+                    <div class="card-img-container bg-mango">
+                        <svg viewBox="0 0 100 100" width="80" height="80">
+                            <rect x="47" y="5" width="6" height="40" fill="#E65100" transform="rotate(5 50 20)"/>
+                            <path d="M25,30 L32,85 C33,90 40,92 50,92 C60,92 67,90 68,85 L75,30 Z" fill="#FFB300"/>
+                            <path d="M25,30 Q50,45 75,30 L73,45 Q50,55 27,45 Z" fill="#FFF9C4" opacity="0.9"/>
+                            <circle cx="42" cy="78" r="4.5" fill="#FF6F00"/>
+                            <circle cx="54" cy="80" r="4.5" fill="#FF6F00"/>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="drink-title">Mango Yakult</h3>
+                        <p class="drink-ingredients">Mango + Yakult + Ice</p>
+                        <button class="drink-price-btn">Rp17.000</button>
+                    </div>
+                </div>
+
+                <!-- Card 6: Chocolate Milk -->
+                <div class="menu-card">
+                    <div class="card-img-container bg-chocolate">
+                        <svg viewBox="0 0 100 100" width="80" height="80">
+                            <rect x="47" y="5" width="6" height="40" fill="#21100B" transform="rotate(-5 50 20)"/>
+                            <path d="M25,30 L32,85 C33,90 40,92 50,92 C60,92 67,90 68,85 L75,30 Z" fill="#5D4037"/>
+                            <path d="M25,30 Q35,18 50,22 Q65,18 75,30 Z" fill="#FFFFFF"/>
+                            <!-- Chocolate Drips -->
+                            <path d="M30,35 L30,55 M45,35 L45,65 M60,35 L60,50" stroke="#3E2723" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="drink-title">Chocolate Milk</h3>
+                        <p class="drink-ingredients">Chocolate + Fresh Milk</p>
+                        <button class="drink-price-btn">Rp15.000</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-cup-togo logo-icon"></i> BOBAKU
+                </a>
+                <p>Minuman enak, mood makin naik!</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Menu</h4>
+                <ul>
+                    <li><a href="#">Boba Milk</a></li>
+                    <li><a href="#">Matcha Latte</a></li>
+                    <li><a href="#">Coffee Cream</a></li>
+                    <li><a href="#">Lainnya</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Tautan</h4>
+                <ul>
+                    <li><a href="#">Beranda</a></li>
+                    <li><a href="#tentang">Tentang Kami</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Ikuti Kami</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+                <p class="social-note">Jangan lupa follow untuk info promo terbaru!</p>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            &copy; 2025 BOBAKU. Semua hak dilindungi.
+        </div>
+    </footer>
+
+</body>
+</html>
